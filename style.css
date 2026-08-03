@@ -2848,16 +2848,22 @@ section .article-card.review-card .feedback-author {
 }
 
 .book-cover {
-  background: #1a3c6e;
-  color: #fff;
+  /* background: #1a3c6e; -> 배경색 제거/유지 자유 */
   height: 120px;
   border-radius: 4px;
+  overflow: hidden;
+  /* 이미지가 프레임 밖으로 나가지 않도록 고정 */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 8px;
+}
+
+/* 🖼️ 신규 추가: 이미지 비율 및 핏 조절 */
+.book-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .book-title {
