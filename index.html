@@ -745,20 +745,26 @@
               <span class="device-label">Tablet</span>
               <div class="mockup-screen tablet-layout bg-light-wire">
                 <div class="tablet-main-row">
-                  <div class="mock-banner-area"><span class="banner-title">배너-1</span></div>
+
+                  <!-- 🎯 메인 배너와 하단 컨트롤러를 좌측 컬럼으로 감싸서 우측 끝선 일치 -->
+                  <div class="tablet-left-col">
+                    <div class="mock-banner-area"><span class="banner-title">배너-1</span></div>
+                    <div class="mock-control-strip">
+                      <div class="mock-arrow">←</div>
+                      <div class="mock-play-btn">▶ 자동 재생 시작</div>
+                      <div class="mock-arrow">→</div>
+                    </div>
+                  </div>
+
+                  <!-- 우측 사이드 탭 -->
                   <div class="tablet-side-tabs">
-                    <!-- 🎯 현재 활성화된 배너-1에 active-thumb 클래스 부여 -->
                     <div class="thumb-item active-thumb">배너-1</div>
                     <div class="thumb-item">배너-2</div>
                     <div class="thumb-item">배너-3</div>
                     <div class="thumb-item">배너-4</div>
                     <div class="thumb-item">배너-5</div>
                   </div>
-                </div>
-                <div class="mock-control-strip">
-                  <div class="mock-arrow">←</div>
-                  <div class="mock-play-btn">▶ 자동 재생 시작</div>
-                  <div class="mock-arrow">→</div>
+
                 </div>
               </div>
             </div>
@@ -841,9 +847,10 @@
           <h3>07. 효율적인 인터페이스 관리를 위한 컴포넌트(Component) 설계</h3>
           <p class="paragraph">
             Navigation bar, Search bar, Banner controller, Modal 등 반복적으로 사용되는 UI 요소들을 모듈화하여 컴포넌트로 설계했습니다.<br>
-            화면 전체의 시각적 일관성을 확보하고 퍼블리싱 및 유지보수 효율성을 극대화했습니다.</p>
+            화면 전체의 시각적 일관성을 확보하고 퍼블리싱 및 유지보수 효율성을 극대화했습니다.
+          </p>
 
-          <!-- 🎨 컴포넌트 라이브러리 보드 -->
+          <!-- 🎨 컴포넌트 라이브러리 보드 (3 Column Grid) -->
           <div class="component-grid-container">
 
             <!-- [Column 1] Nav, Search, Quick Menu, Button -->
@@ -853,11 +860,17 @@
                 <span class="comp-label">Navigation bar</span>
                 <div class="ui-nav-bar">
                   <div class="nav-row nav-mobile">
-                    <span class="logo-txt">🏛️ 화성시립도서관</span>
+                    <a href="#" class="nav-logo">
+                      <img src="./assets/logo.png" alt="" class="logo-img" />
+                      <span class="logo-text">화성시립도서관</span>
+                    </a>
                     <div class="hamburger-icon"><span></span><span></span><span></span></div>
                   </div>
                   <div class="nav-row nav-desktop">
-                    <span class="logo-txt">🏛️ 화성시립도서관</span>
+                    <a href="#" class="nav-logo">
+                      <img src="./assets/logo.png" alt="" class="logo-img" />
+                      <span class="logo-text">화성시립도서관</span>
+                    </a>
                     <div class="nav-links">
                       <span>로그인</span>
                       <span>회원가입</span>
@@ -873,11 +886,15 @@
                 <div class="ui-search-stack">
                   <div class="search-input-box">
                     <input type="text" placeholder="찾으시는 도서를 검색하세요." readonly>
-                    <span class="search-btn">🔍</span>
+                    <button type="submit" class="search-btn" aria-label="검색">
+                      <img src="./assets/icon9.svg" alt="" class="search-icon-img" />
+                    </button>
                   </div>
                   <div class="search-input-box active">
                     <input type="text" value="|" readonly>
-                    <span class="search-btn">🔍</span>
+                    <button type="submit" class="search-btn" aria-label="검색">
+                      <img src="./assets/icon9.svg" alt="" class="search-icon-img" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -886,7 +903,9 @@
               <div class="comp-box">
                 <span class="comp-label">Quick menu</span>
                 <div class="ui-quick-card">
-                  <div class="quick-icon">📘</div>
+                  <div class="quick-icon">
+                    <img src="./assets/icon1.png" alt="도서관 이용안내 아이콘" class="quick-icon-img">
+                  </div>
                   <div class="quick-info">
                     <strong>도서관 이용안내</strong>
                     <span>휴관, 회원가입, 대출안내</span>
@@ -910,46 +929,72 @@
               </div>
             </div>
 
-            <!-- [Column 2] Banner Controller, Main Banner, Tab, Indicator -->
+            <!-- [Column 2] Banner Controller, Tab, Indicator Bar -->
             <div class="comp-col">
               <!-- Banner controller -->
               <div class="comp-box">
                 <span class="comp-label">Banner controller</span>
-                <div class="ui-banner-preview-group">
-                  <div class="banner-sub-card green">
-                    <span class="b-tag">2026 화성특례시와 함께 읽는 책</span>
-                    <strong>작가와의 만남</strong>
-                    <div class="b-ctrl-strip">
-                      <span>←</span>
-                      <span class="play-pill">▶ 자동 재생 시작</span>
-                      <span>→</span>
+
+                <!-- 1) Mobile 형태 (미니 배너 2개) -->
+                <div class="wire-mobile-preview-group">
+                  <div class="wire-mob-card">
+                    <div class="mob-banner-inner">
+                      <span class="wire-b-title">배너-1</span>
+                      <div class="wire-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                      </div>
+                    </div>
+                    <div class="wire-btn-strip">
+                      <button type="button" class="wire-icon-btn">←</button>
+                      <button type="button" class="wire-play-btn">▶ 자동 재생 시작</button>
+                      <button type="button" class="wire-icon-btn">→</button>
                     </div>
                   </div>
-                  <div class="banner-sub-card green">
-                    <span class="b-tag">2026 화성특례시와 함께 읽는 책</span>
-                    <strong>작가와의 만남</strong>
-                    <div class="b-ctrl-strip">
-                      <span>←</span>
-                      <span class="play-pill">▶ 자동 재생 시작</span>
-                      <span>→</span>
+
+                  <div class="wire-tab-card">
+                    <div class="tab-banner-row">
+                      <div class="tab-left-group">
+                        <div class="tab-banner-inner">
+                          <span class="wire-b-title">배너-1</span>
+                        </div>
+                        <div class="wire-btn-strip">
+                          <button type="button" class="wire-icon-btn">←</button>
+                          <button type="button" class="wire-play-btn">▶ 자동 재생 시작</button>
+                          <button type="button" class="wire-icon-btn">→</button>
+                        </div>
+                      </div>
+                      <div class="tab-thumb-list">
+                        <span class="wire-thumb active">배너-1</span>
+                        <span class="wire-thumb">배너-2</span>
+                        <span class="wire-thumb">배너-3</span>
+                        <span class="wire-thumb">배너-4</span>
+                        <span class="wire-thumb">배너-5</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Main Banner Mockup -->
-                <div class="ui-main-banner-mock green">
-                  <span class="hero-b-tag">2026 화성특례시와 함께 읽는 책</span>
-                  <h2>작가와의 만남</h2>
-                  <div class="banner-bottom-bar">
-                    <div class="mini-thumbs">
-                      <span class="thumb active"></span>
-                      <span class="thumb"></span>
-                      <span class="thumb"></span>
+                <!-- 2) Desktop 형태 (하단 메인 배너) -->
+                <div class="wire-desk-card">
+                  <div class="desk-banner-inner">
+                    <span class="wire-b-title large">배너-1</span>
+                  </div>
+                  <div class="desk-bottom-control">
+                    <div class="desk-thumb-list">
+                      <span class="wire-thumb active">배너-1</span>
+                      <span class="wire-thumb">배너-2</span>
+                      <span class="wire-thumb">배너-3</span>
+                      <span class="wire-thumb">배너-4</span>
+                      <span class="wire-thumb">배너-5</span>
                     </div>
-                    <div class="ctrl-btns">
-                      <span>←</span>
-                      <span>→</span>
-                      <span class="active">❚❚</span>
+                    <div class="desk-ctrl-btns">
+                      <button type="button" class="wire-icon-btn">←</button>
+                      <button type="button" class="wire-icon-btn">→</button>
+                      <button type="button" class="wire-play-fill-btn">▶</button>
                     </div>
                   </div>
                 </div>
@@ -995,8 +1040,10 @@
               <div class="comp-box">
                 <span class="comp-label">Notice</span>
                 <div class="ui-notice-strip">
-                  <span class="notice-badge">공통</span>
-                  <span class="notice-txt">제60회 도서관주간 및 도서관의 날 행사 안내</span>
+                  <div class="notice-main">
+                    <span class="notice-badge">공통</span>
+                    <span class="notice-txt">제60회 도서관주간 및 도서관의 날 행사 안내</span>
+                  </div>
                   <span class="notice-date">2026-03-25</span>
                 </div>
               </div>
@@ -1005,29 +1052,32 @@
               <div class="comp-box">
                 <span class="comp-label">Modal</span>
                 <div class="ui-modal-group">
-                  <!-- Modal 1 -->
+                  <!-- Modal 1 (자세히 보기) -->
                   <div class="ui-modal-card">
-                    <div class="modal-header">
+                    <div class="modal-header navy-hdr">
                       <span>작가와의 만남</span>
                       <span class="close-btn">✕</span>
                     </div>
-                    <div class="modal-body green">
-                      <strong>작가와의 만남</strong>
+                    <div class="modal-body-white">
+                      <img src="./assets/banner_1.png" alt="작가와의 만남 배너" class="modal-banner-img">
                     </div>
-                    <button class="modal-action-btn">자세히 보기</button>
+                    <button class="modal-action-btn navy-btn">자세히 보기</button>
                   </div>
 
-                  <!-- Modal 2 -->
+                  <!-- Modal 2 (내용 닫기) -->
                   <div class="ui-modal-card">
-                    <div class="modal-header">
+                    <div class="modal-header navy-hdr">
                       <span>작가와의 만남</span>
                       <span class="close-btn">✕</span>
                     </div>
-                    <div class="modal-body-text">
-                      <p>2026 화성특례시와 함께 읽는 책 작가와의 만남!</p>
-                      <p>일시: 2026. 06. 13(토) 10:00~12:00</p>
+                    <div class="modal-body-white detail-text-body">
+                      <img src="./assets/banner_1.png" alt="작가와의 만남 배너" class="modal-banner-img mb-6">
+                      <p class="m-desc-title">2026 화성특례시와 함께 읽는 책 작가와의 만남!</p>
+                      <p class="m-desc-sub">허은미 작가의 함께하는 북토크에 초대합니다.</p>
+                      <p class="m-desc-info">일시: 2026. 06. 13(토) 10:00 - 12:00</p>
+                      <p class="m-desc-info">대상: 초등 저학년 아동 및 학부모</p>
                     </div>
-                    <button class="modal-action-btn dark">내용 닫기</button>
+                    <button class="modal-action-btn navy-btn">내용 닫기</button>
                   </div>
                 </div>
               </div>
